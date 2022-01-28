@@ -19,7 +19,7 @@ app.use(cors({ origin: "http://localhost:3000", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
-  "mongodb://localhost:27017/clientportal",
+  "mongodb+srv://clientportal:ql7yO5pYv0v7tGAx@cluster0.2du46.mongodb.net/clientportal",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
