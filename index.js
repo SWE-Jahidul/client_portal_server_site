@@ -29,16 +29,39 @@ mongoose.connect(
   }
 );
 
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+});
+
+const User = new mongoose.model("User", userSchema);
 // Routes
 
 // SignUp post route
-app.post("/signup", (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email: email }, (err, user) => {
     if (user) {
-      res.send({ message: "Email already Register" });
+      if (password === user.password) {
+        res.send({ message: "Login Successfull", user: user });
+      } else {
+        res.send({ message: "Password didn't match" });
+      }
+    } else {
+      res.send({ message: "User not registered" });
+    }
+  });
+});
+
+app.post("/register", (req, res) => {
+  const { name, email, password } = req.body;
+  User.findOne({ email: email }, (err, user) => {
+    if (user) {
+      res.send({ message: "User already registerd" });
     } else {
       const user = new User({
+        name,
         email,
         password,
       });
@@ -46,41 +69,16 @@ app.post("/signup", (req, res) => {
         if (err) {
           res.send(err);
         } else {
-          res.send({ message: "Successfully Signup " });
+          res.send({ message: "Successfully Registered, Please login now." });
         }
       });
     }
   });
 });
 
-// singin  post route
-app.post("/signin", (req, res) => {
-  const { email, password } = req.body;
-  User.findOne({ email: email }, (err, user) => {
-    if (user) {
-      if (password === user.password) {
-        res.send({ message: "Signin Sucesssfully ", user: user });
-      } else {
-        res.send({ message: "Password Does not Match !!" });
-      }
-    } else {
-      res.send({ message: "User Not Found !! " });
-    }
-  });
-
-  res.send("My  Api SignIn ");
-});
-
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
-
-const userSchema = new mongoose.Schema({
-  email: String,
-  password: String,
-});
-
-const User = new mongoose.model("User", userSchema);
 
 // const getAccessToken = () => {
 let access_token;
@@ -103,7 +101,7 @@ app.get("/test", (req, res) => {
   res.status(200).json(access_token);
 });
 
-// Get Data
+// Get Data Contact modeules
 app.get("/getdata", (req, res) => {
   axios
     .get(`https://zohoapis.com/crm/v2/Contacts`, {
@@ -167,6 +165,23 @@ app.post("/delete/:id", (req, res) => {
     .catch(function (res) {
       console.log(res);
       res.sendStatus(res.status);
+    });
+});
+
+// Deals modiul data get
+app.get("/getdeals", (req, res) => {
+  axios
+    .get(`https://zohoapis.com/crm/v2/Deals`, {
+      headers: {
+        Authorization: `Zoho-oauthtoken  ${access_token}`,
+      },
+    })
+    .then(function (response) {
+      res.status(200).json(response.data);
+      // console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
     });
 });
 
