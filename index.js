@@ -185,6 +185,24 @@ app.get("/getdeals", (req, res) => {
     });
 });
 
+// get Products
+
+app.get("/getproducts", (req, res) => {
+  axios
+    .get(`https://zohoapis.com/crm/v2/Products`, {
+      headers: {
+        Authorization: `Zoho-oauthtoken  ${access_token}`,
+      },
+    })
+    .then(function (response) {
+      res.status(200).json(response.data);
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
 // update Data
 app.listen(app.get("port"), function () {
   console.log("Node app is running at http://localhost:" + app.get("port"));
