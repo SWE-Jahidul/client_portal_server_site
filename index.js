@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "http://localhost:3000", credentials: false }));
+// app.use(cors({ origin: "http://localhost:3000", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
@@ -84,7 +84,7 @@ app.get("/", (req, res) => {
 let access_token;
 axios
   .post(
-    `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN }&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
+    `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
   )
   .then(function (response) {
     access_token = response.data.access_token;
@@ -242,6 +242,10 @@ app.get("/getprojects", (req, res) => {
 });
 
 // update Data
-app.listen(app.get("port"), function () {
-  console.log("Node app is running at http://localhost:" + app.get("port"));
+// app.listen(app.get("port"), function () {
+//   console.log("Node app is running at http://localhost:" + app.get("port"));
+// });
+
+app.listen(port, () => {
+  console.log(` listening at${port}`);
 });
