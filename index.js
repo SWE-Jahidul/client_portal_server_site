@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "http://localhost:3000", credentials: false }));
+app.use(cors({ origin: "https://clientportalbd.herokuapp.com", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
