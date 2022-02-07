@@ -84,7 +84,7 @@ app.get("/", (req, res) => {
 let access_token;
 axios
   .post(
-    `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
+    `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN }&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
   )
   .then(function (response) {
     access_token = response.data.access_token;
@@ -95,9 +95,29 @@ axios
 //         return access_token
 // }
 
+// Start  for zoho project
+
+// let access_token_for_zoho_project;
+// axios
+//   .post(
+//     `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN_ZOHO_PROJECT}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
+//   )
+//   .then(function (response) {
+//     access_token_for_zoho_project = response.data.access_token_for_zoho_project;
+//   })
+//   .catch(function (error) {
+//     access_token_for_zoho_project = error;
+//   });
+
+// End for zoho Project
+
 app.get("/test", (req, res) => {
   // console.log(access_token);
   // console.log(getAccessToken());
+  res.status(200).json(access_token);
+});
+
+app.get("/projecttest", (req, res) => {
   res.status(200).json(access_token);
 });
 
@@ -190,6 +210,24 @@ app.get("/getdeals", (req, res) => {
 app.get("/getproducts", (req, res) => {
   axios
     .get(`https://zohoapis.com/crm/v2/Products`, {
+      headers: {
+        Authorization: `Zoho-oauthtoken  ${access_token}`,
+      },
+    })
+    .then(function (response) {
+      res.status(200).json(response.data);
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
+// get zoho Projectssadfas
+
+app.get("/getprojects", (req, res) => {
+  axios
+    .get(`https://projectsapi.zoho.com/restapi/portals/`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
