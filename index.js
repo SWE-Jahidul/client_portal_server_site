@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use(cors({ origin: "http://localhost:3000", credentials: false }));
+app.use(cors({ origin: "https://clientportalbd.herokuapp.com", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
@@ -243,5 +243,5 @@ app.get("/getprojects", (req, res) => {
 
 // update Data
 app.listen(app.get("port"), function () {
-  console.log("Node app is running at http://localhost:" + app.get("port"));
+  console.log("Node app is running at https://clientportalbd.herokuapp.com" + app.get("port"));
 });
