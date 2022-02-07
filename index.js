@@ -76,7 +76,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.get("/try", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
@@ -122,7 +122,7 @@ app.get("/projecttest", (req, res) => {
 });
 
 // Get Data Contact modeules
-app.get("/", (req, res) => {
+app.get("/getdata", (req, res) => {
   axios
     .get(`https://zohoapis.com/crm/v2/Contacts`, {
       headers: {
