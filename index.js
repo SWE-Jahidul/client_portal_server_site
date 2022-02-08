@@ -230,7 +230,7 @@ app.get("/getproducts", (req, res) => {
 
 app.get("/getprojects", (req, res) => {
   axios
-    .get(`https://projectsapi.zoho.com/restapi/portals/`, {
+    .get(`https://projectsapi.zoho.com/restapi/portals`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
