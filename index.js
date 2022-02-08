@@ -15,10 +15,10 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-app.use(
-  cors({ origin: "https://clientportal.netlify.app", credentials: false })
-);
-// app.use(cors({ origin: " http://localhost:3000", credentials: false }));
+// app.use(
+//   cors({ origin: "https://clientportal.netlify.app", credentials: false })
+// );
+app.use(cors({ origin: "http://localhost:3000", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
@@ -127,7 +127,7 @@ app.get("/projecttest", (req, res) => {
 // Get Data Contact modeules
 app.get("/getdata", (req, res) => {
   axios
-    .get(`https://zohoapis.com/crm/v2/Contacts`, {
+    .get(`hhttps://www.zohoapis.com/crm/v2/Contacts`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
