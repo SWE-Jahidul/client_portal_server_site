@@ -15,10 +15,10 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-// app.use(
-//   cors({ origin: "https://clientportal.netlify.app", credentials: false })
-// );
-app.use(cors({ origin: "http://localhost:3000", credentials: false }));
+app.use(
+  cors({ origin: "https://clientportal.netlify.app", credentials: false })
+);
+// app.use(cors({ origin: "http://localhost:3000", credentials: false }));
 
 //  MonngoDb Connect
 mongoose.connect(
