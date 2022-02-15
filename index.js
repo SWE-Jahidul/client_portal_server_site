@@ -87,7 +87,7 @@ app.get("/", (req, res) => {
 let access_token;
 axios
   .post(
-    `https://accounts.zoho.com/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
+    `https://accounts.zoho.eu/oauth/v2/token?refresh_token=${process.env.REFRESH_TOKEN}&client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&grant_type=refresh_token`
   )
   .then(function (response) {
     access_token = response.data.access_token;
@@ -127,7 +127,7 @@ app.get("/projecttest", (req, res) => {
 // Get Data Contact modeules
 app.get("/getdata", (req, res) => {
   axios
-    .get(`hhttps://www.zohoapis.com/crm/v2/Contacts`, {
+    .get(`https://www.zohoapis.eu/crm/v2/Contacts`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
@@ -151,7 +151,7 @@ app.post("/insert", (req, res) => {
   // console.log(JSON.stringify(body));
 
   axios
-    .post(`https://zohoapis.com/crm/v2/Contacts`, requestBody, {
+    .post(`https://zohoapis.eu/crm/v2/Contacts`, requestBody, {
       headers: {
         Authorization: `Zoho-oauthtoken ${access_token}`,
       },
@@ -175,7 +175,7 @@ app.post("/delete/:id", (req, res) => {
   console.log(req.params.id);
 
   axios
-    .delete(`https://zohoapis.com/crm/v2/Contacts/${req.params.id}`, {
+    .delete(`https://zohoapis.eu/crm/v2/Contacts/${req.params.id}`, {
       headers: {
         Authorization: `Zoho-oauthtoken ${access_token}`,
       },
@@ -194,7 +194,7 @@ app.post("/delete/:id", (req, res) => {
 // Deals modiul data get
 app.get("/getdeals", (req, res) => {
   axios
-    .get(`https://zohoapis.com/crm/v2/Deals`, {
+    .get(`https://zohoapis.eu/crm/v2/Deals`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
@@ -212,7 +212,7 @@ app.get("/getdeals", (req, res) => {
 
 app.get("/getproducts", (req, res) => {
   axios
-    .get(`https://zohoapis.com/crm/v2/Products`, {
+    .get(`https://zohoapis.eu/crm/v2/Products`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
@@ -230,7 +230,7 @@ app.get("/getproducts", (req, res) => {
 
 app.get("/getprojects", (req, res) => {
   axios
-    .get(`https://projectsapi.zoho.com/restapi/portals`, {
+    .get(`https://projectsapi.zoho.eu/restapi/portals`, {
       headers: {
         Authorization: `Zoho-oauthtoken  ${access_token}`,
       },
